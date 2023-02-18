@@ -1,0 +1,75 @@
+==============================
+
+ ____  ____   ____   _  _   _
+|  _ \|  _ \ / ___| | || | / |
+| |_) | |_) | |  _  | || |_| |
+|  _ <|  __/| |_| | |__   _| |
+|_| \_\_|    \____|    |_| |_|
+
+
+==============================
+
+Turn based RPG - CSCI 41 Version
+
+One letter grade is available for each of these bullet points implemented. If
+you do only part of a bullet point, you will get a half grade.
+
+Words in all caps are the things you will be graded on. Everything else is a
+detail that you can change however you want.
+
+1) Must have a FUNCTIONAL WORLD MAP that shows a view of the game world.
+Must be able to WALK the heroes around the world map and PICK UP TREASURE,
+BOUNCE OFF OBSTACLES, and FIGHT monsters by walking over them.
+You must be able to BEAT THE GAME.
+
+2) Must have a class for HEROES and MONSTERS, using PROPER CLASS DESIGN and INHERITANCE.
+Must have things like health, attack value, defense value, special abilities, and SPEED.
+You can design these things however you want, only SPEED is required. You must
+build a class hierarchy as such: Base Class for all Actors in the world,
+subclassed for heroes and monsters, subclassed for different kinds of heroes
+and monsters. 
+               Actors
+        |--------|--------|
+      Heroes           Monsters
+	  --|---           ---|----
+      |    |          |   |   |
+	Rogue Fighter  Goblin Orc Kerney
+
+The exact details are up to you, these are just examples.
+
+3) All heroes & monsters must be held in a DATA STRUCTURE of some sort using
+smart pointers so that it does not slice the Actors. You Must LOAD
+heroes, monsters, and state of the world at launch, and SAVE it at program quit.
+You must write a New Game function that will reset the world to the start.
+
+4) When walking over a monster, switch to a combat screen. Must use a circular
+linked list to keep track of whose turn it is. They will be originally
+inserted into the CIRCULAR LINKED LIST in order of their SPEED stat. In other
+words, if you have the following heroes: Bob (Speed 10), Cindy (Speed 15),
+Charlie (Speed 8), and the following monsters: Leila (Speed 12), Johnson
+(Speed 9), and Cthulu (Speed 1), then the circular linked list will look like
+this at the beginning of the combat:
+Cindy, Leila, Bob, Johnson, Charlie, Cthulu
+
+So Cindy will go first, followed by Leila, followed by Bob, etc. Once Cthulu
+goes, then it is Cindy's turn again.
+
+When someone is killed in combat, you can either delete them from the circular
+linked list, or you can mark them as dead, and then just skip their turn. End
+combat once all heroes or monsters are dead.
+
+5) You must visualize the turn order using BRIDGES. Look at the bridges_demo
+directory on instructions on getting set up with BRIDGES and sample code.
+
+Documentation:
+https://bridgesuncc.github.io/doc/cxx-api/current/html/classbridges_1_1datastructure_1_1_circ_d_lelement.html
+
+Extra Credit:
+1) Theme / doing super cool awesome stuff
+2) Cover Art and Music - You have to *make it yourself*, you can't just copy it
+from soundcloud or something. Post music on YouTube and attach art to Canvas
+submission. It has to be at least somewhat good. Kinda. I don't have huge
+standards but come on.
+
+When you submit on Canvas, tell me what bullet points you did and link the
+music and art if you did that.
