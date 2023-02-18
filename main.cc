@@ -1,5 +1,5 @@
-//Put your name(s) here:
-//What bullet points did you do:
+//Put your name(s) here: Rene Hernandez
+//What bullet points did you do: 1, 2, 3, 4, 5 + 2 extra credit bullets
 //Delete this next line to let the code compile
 //#error Delete This!
 #include "map.h"
