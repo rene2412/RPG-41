@@ -40,7 +40,7 @@ class Map {
 					map.at(i).at(j) = WALL;
 				else if (i == SIZE/2 and j == SIZE/2) 
 					map.at(i).at(j) = HERO;
-				else {
+				else {/*
 					//5% chance of monster
 					if (d100(gen) <= 5) {
 						map.at(i).at(j) = MONSTER;
@@ -57,7 +57,8 @@ class Map {
 					else if (d100(gen) <= 40) { //40% chance of water near other water
 						if (map.at(i-1).at(j) == WATER or map.at(i+1).at(j) == WATER or map.at(i).at(j-1) == WATER or map.at(i).at(j+1) == WATER)
 							map.at(i).at(j) = WATER;
-					}
+					}*/
+					map.at(i).at(j) = OPEN;;
 				}
 			}
 		}

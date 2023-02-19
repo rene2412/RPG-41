@@ -35,8 +35,8 @@ void turn_off_ncurses() {
 	if (system("clear")) {}
 }
 
-void interact(Map& curMap,int x , int y){
-	if(curMap.get_character(x,y) == '$'){
+void interact(Map& curMap,int x , int y, char z){
+	if(curMap.get_character(x,y) == z){
 		turn_off_ncurses();
 		cout << curMap.get_character(x,y) << endl;
 		cout << x << " " << y << endl;
@@ -64,18 +64,21 @@ int main() {
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
 	map.set_character(20,20,'L');
+	map.set_character(20,21,'L');
+	map.set_character(20,22,'L');
+	map.set_character(20,23,'L');
+	map.set_character(20,24,'L');
+	map.set_character(20,25,'L');
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
 		if (ch == 'q' || ch == 'Q') break;
 		else if (ch == RIGHT) {
 			x++;
 			if (x >= Map::SIZE) x = Map::SIZE - 1; //Clamp value
-			interact(map,x,y);
 		}
 		else if (ch == LEFT) {
 			x--;
 			if (x < 0) x = 0;
-			interact(map,x,y);
 		}
 		else if (ch == UP) {
 			/*If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
@@ -88,23 +91,28 @@ int main() {
 			*/
 			y--;
 			if (y < 0) y = 0;
-			interact(map,x,y);
 		}
 		else if (ch == DOWN) {
 			y++;
 			if (y >= Map::SIZE) y = Map::SIZE - 1; //Clamp value
-			interact(map,x,y);
-		}
+			}
 		else if (ch == ERR) { //No keystroke
 			; //Do nothing
 		}
 		//Stop flickering by only redrawing on a change
 		if (x != old_x or y != old_y) {
-			/* Do something like this, idk 
-			if (map.get(x,y) == Map::TREASURE) {
-				map.set(x,y,Map::OPEN);
-				money++;
-			} else if (map.get(x,y) == Map::WALL) {
+			interact(map,x,y,'L');
+			/*Do something like this, idk 
+			if (map.get_character(x,y) == 'L') {
+				turn_off_ncurses();
+				string s;
+				cout << "ITS A MONSTER" << endl;
+				cin >> s;
+				cout << s << endl;
+				sleep(1);
+				turn_on_ncurses();
+			} 
+			else if (map.get_character(x,y) == Map::WALL) {
 				x = old_x;
 				y = old_y;
 			}
