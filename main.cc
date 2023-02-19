@@ -35,24 +35,50 @@ void turn_off_ncurses() {
 	if (system("clear")) {}
 }
 
+void interact(Map& curMap,int x , int y){
+	if(curMap.get_character(x,y) == '$'){
+		turn_off_ncurses();
+		cout << curMap.get_character(x,y) << endl;
+		cout << x << " " << y << endl;
+		string s;
+		cin >> s;
+		cout << s << endl;
+		sleep(1);
+		turn_on_ncurses();		
+	}
+}
+
+/*void dialogue(){
+	turn_off_ncurses();
+	string s;
+	cin >> s;
+	cout << s << endl;
+	sleep(1);
+	turn_on_ncurses();
+
+}*/
+
 int main() {
 	turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
+	map.set_character(20,20,'L');
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
 		if (ch == 'q' || ch == 'Q') break;
 		else if (ch == RIGHT) {
 			x++;
 			if (x >= Map::SIZE) x = Map::SIZE - 1; //Clamp value
+			interact(map,x,y);
 		}
 		else if (ch == LEFT) {
 			x--;
 			if (x < 0) x = 0;
+			interact(map,x,y);
 		}
 		else if (ch == UP) {
-			/* If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
+			/*If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
 			turn_off_ncurses();
 			string s;
 			cin >> s;
@@ -62,10 +88,12 @@ int main() {
 			*/
 			y--;
 			if (y < 0) y = 0;
+			interact(map,x,y);
 		}
 		else if (ch == DOWN) {
 			y++;
 			if (y >= Map::SIZE) y = Map::SIZE - 1; //Clamp value
+			interact(map,x,y);
 		}
 		else if (ch == ERR) { //No keystroke
 			; //Do nothing

@@ -11,6 +11,13 @@ class Map {
 	default_random_engine gen;
 	public:
 	//TODO: Write a getter and a setter to get/set the characters in the map
+	void set_character(int x, int y, char temp){
+		map.at(x).at(y) = temp;
+	}
+	char get_character(int x , int y){
+		return map.at(x).at(y);
+	}
+
 	//TODO: Write a function to save the map and reload the map
 	static const char HERO     = 'H';
 	static const char MONSTER  = 'M';
