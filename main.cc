@@ -4,6 +4,7 @@
 //#error Delete This!
 #include "map.h"
 #include <unistd.h>
+#include"actors.h"
 
 const int MAX_FPS = 90; //Cap frame rate 
 const unsigned int TIMEOUT = 10; //Milliseconds to wait for a getch to finish
@@ -38,38 +39,37 @@ void turn_off_ncurses() {
 void interact(Map& curMap,int x , int y, char z){
 	if(curMap.get_character(x,y) == z){
 		turn_off_ncurses();
-		cout << curMap.get_character(x,y) << endl;
-		cout << x << " " << y << endl;
-		string s;
-		cin >> s;
-		cout << s << endl;
-		curMap.set_character(y,x,'.');//set spot empty
+//		string s;
+//		cin >> s;
+//		cout << s << endl;
+		if(z == '$'){
+			cout << "you picked up moneees " << endl;
+			curMap.set_character(y,x,'.');//set spot empty
+		}
+		if(z == 'M'){//if collision is with monster
+			cout << "time to fight" << endl;
+			cout << "you slayed the beast" << endl;
+			curMap.set_character(y,x,'.');//set spot empty
+		}
 		sleep(1);
 		turn_on_ncurses();		
 	}
 }
 
-/*void dialogue(){
-	turn_off_ncurses();
-	string s;
-	cin >> s;
-	cout << s << endl;
-	sleep(1);
-	turn_on_ncurses();
-
-}*/
 
 int main() {
 	turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
-	map.set_character(20,20,'L');
+	map.set_character(20,20,'$');
 	map.set_character(20,21,'L');
-	map.set_character(20,22,'L');
+	map.set_character(20,22,'M');
 	map.set_character(20,23,'L');
-	map.set_character(20,24,'L');
+	map.set_character(20,24,'M');
 	map.set_character(20,25,'L');
+	map.set_character(21,20,'#');
+	map.set_character(21,22,'#');
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
 		if (ch == 'q' || ch == 'Q') break;
@@ -102,7 +102,8 @@ int main() {
 		}
 		//Stop flickering by only redrawing on a change
 		if (x != old_x or y != old_y) {
-			interact(map,x,y,'L');
+			interact(map,x,y,'M');
+			interact(map,x,y,'$');
 			/*Do something like this, idk 
 			if (map.get_character(x,y) == 'L') {
 				turn_off_ncurses();
@@ -112,12 +113,11 @@ int main() {
 				cout << s << endl;
 				sleep(1);
 				turn_on_ncurses();
-			} 
-			else if (map.get_character(x,y) == Map::WALL) {
+			} */
+			if (map.get_character(x,y) == Map::WALL) {
 				x = old_x;
 				y = old_y;
 			}
-			*/
 			//clear(); //Put this in if the screen is getting corrupted
 			map.draw(x,y);
 			mvprintw(Map::DISPLAY+1,0,"X: %i Y: %i\n",x,y);
