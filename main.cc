@@ -43,6 +43,7 @@ void interact(Map& curMap,int x , int y, char z){
 		string s;
 		cin >> s;
 		cout << s << endl;
+		curMap.set_character(y,x,'.');//set spot empty
 		sleep(1);
 		turn_on_ncurses();		
 	}

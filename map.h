@@ -15,7 +15,7 @@ class Map {
 		map.at(x).at(y) = temp;
 	}
 	char get_character(int x , int y){
-		return map.at(x).at(y);
+		return map.at(y).at(x);
 	}
 
 	//TODO: Write a function to save the map and reload the map
