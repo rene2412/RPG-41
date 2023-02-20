@@ -4,8 +4,7 @@
 //#error Delete This!
 #include "map.h"
 #include <unistd.h>
-#include"actors.h"
-
+#include "actors.h"
 const int MAX_FPS = 90; //Cap frame rate 
 const unsigned int TIMEOUT = 10; //Milliseconds to wait for a getch to finish
 const int UP = 65; //Key code for up arrow
@@ -58,7 +57,9 @@ void interact(Map& curMap,int x , int y, char z){
 
 
 int main() {
-	turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
+vector<unique_ptr<Hero>> heroes;
+populateHeroes(heroes);
+turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;

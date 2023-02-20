@@ -1,6 +1,9 @@
 #pragma once
 #include<string>
-//#using namespace std;
+#include <vector>
+#include <memory>
+using namespace std;
+
 
 class Actor{
 	protected: 
@@ -58,10 +61,21 @@ class Hero : public Actor{
 		int money = 0;
 		int lvl = 1;
 	public:
-	const int getMoney(){return money;}
-	void setMoney(int newMoney){
+Hero() : money(0), lvl(1) {}
+ Hero(string newName, string newHeroType, int newHp, int newSpeed, int newDmg, int newMoney)  : Actor(newName, newHp, newSpeed, newDmg) {
+    heroType = newHeroType;
+    money = newMoney;
+} 
+	const int getMoney() const { return money; }
+	void setMoney(int newMoney) {
 		money = newMoney;
 	}
 };
+
+void populateHeroes(vector<unique_ptr<Hero>>& heroes) {
+  // create heroes and add them to the vector
+  heroes.push_back(make_unique<Hero>("Agent K", "Blade-Runner", 100, 23, 50, 10));
+  heroes.push_back(make_unique<Hero>("John Wick", "Hitman", 150, 30, 70, 20));
+}
 
 //WE NEED TO MAEK THE DIFFERENT TYPES FOR MONSTERS AND HEROS AND JUST GIVE THEM MULTIPLIERS TO DAMAGE ETC BANDITS CAN STEAL MONEY AND MONSTERS DO EXTRA DMG // MAGES DO EXTRA MAGIC DMG AND ARE WEAKER DEFENSE // CHADS ARE GOOD AT DMG THTHATS IT
