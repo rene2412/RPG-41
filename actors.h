@@ -46,27 +46,36 @@ class Actor{
 
 class Monster : public Actor{
 	private:
-		string monsterType;
-		//int monsterLvl = 0;// MIGHT DO DIFFERENT LEVEL MONSTER FOR DIFFERENT LEVEL DIFFICULTY
+		string MonsterType;
+		int MonsterLvl = 0;// MIGHT DO DIFFERENT LEVEL MONSTER FOR DIFFERENT LEVEL DIFFICULTY
 	public:
-	const string getMonsterType(){return monsterType;}
-	void setMonsterType(string newType){
-		monsterType = newType;
+	Monster() :  MonsterLvl(1) {} //defualt 
+	Monster (string newName, string newMonsterType, int newHp, int newSpeed, int newDmg, int newMonsterLvl) : Actor (newName, newHp, newSpeed, newDmg) {
+	MonsterType = newMonsterType;
+	MonsterLvl = newMonsterLvl;
 	}
+	string getMonsterType() const { return MonsterType; }
+	void setMonsterType(string newType){
+		MonsterType = newType;
+	}
+	int getMonsterLevel() const { return MonsterLvl; }
+	void setMonsterLevel(int level) { 
+		MonsterLvl = level;
+	} 
 };
 
 class Hero : public Actor{
 	private:
-		 string heroType;
+		string heroType;
 		int money = 0;
 		int lvl = 1;
 	public:
-Hero() : money(0), lvl(1) {}
- Hero(string newName, string newHeroType, int newHp, int newSpeed, int newDmg, int newMoney)  : Actor(newName, newHp, newSpeed, newDmg) {
+	Hero() : money(0), lvl(1) {} 
+ 	Hero(string newName, string newHeroType, int newHp, int newSpeed, int newDmg, int newMoney)  : Actor(newName, newHp, newSpeed, newDmg) {
     heroType = newHeroType;
     money = newMoney;
 } 
-	const int getMoney() const { return money; }
+	 int getMoney() const { return money; }
 	void setMoney(int newMoney) {
 		money = newMoney;
 	}
@@ -79,10 +88,20 @@ void populate_Heroes(vector<unique_ptr<Hero>>& heroes) {
   heroes.push_back(make_unique<Hero>("Agent K", "Blade-Runner", 100, 23, 50, 10));
   heroes.push_back(make_unique<Hero>("John Wick", "Hitman", 150, 30, 70, 20));
 }
+void populate_Monsters(vector<unique_ptr<Monster>>& monsters) {
+	// create monsters and add them to a vector 
+	monsters.push_back(make_unique<Monster>("Bowser", "Turtle", 200, 10, 45, 15));  
+	 monsters.push_back(make_unique<Monster>("Calculus-3", "Math", 1, 1, 999, 3));
+}
+
  void print_Heroes(const vector<unique_ptr<Hero>>& heroes) {
 	for (const auto& hero : heroes) {
 	cout << "Name: " << hero->getName() <<  " | Type: " << hero->getHeroType() << " | HP: " << hero->getHp() << " | Speed: " << hero->getSpeed() << " | Damage: " << hero->getDmg() << " | Money: " << hero->getMoney() << " | Level: " << hero->getLevel() << endl; 
 	}
  }
-
+	void print_Monsters (vector<unique_ptr<Monster>>& monsters) { 
+		for (const auto& monster : monsters) { 
+			cout << "Name: " << monster->getName() << " | Type: " << monster->getMonsterType() << " | HP: " << monster->getHp() << " | Speed: " << monster->getSpeed() << " | Damage: " << monster->getDmg() << " | Level: " << monster-> getMonsterLevel() << endl;
+		}
+	}
 //WE NEED TO MAEK THE DIFFERENT TYPES FOR MONSTERS AND HEROS AND JUST GIVE THEM MULTIPLIERS TO DAMAGE ETC BANDITS CAN STEAL MONEY AND MONSTERS DO EXTRA DMG // MAGES DO EXTRA MAGIC DMG AND ARE WEAKER DEFENSE // CHADS ARE GOOD AT DMG THTHATS IT

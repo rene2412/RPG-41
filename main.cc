@@ -38,22 +38,25 @@ void check() {
 cout << "BAD INPUT! Please select a valid Hero" << endl;
 exit(1);
 }
-void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes) {
+void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes, vector<unique_ptr<Monster>>& monsters) {
     turn_off_ncurses();
 	if (curMap.get_character(x, y) == collision) {
         if (collision == 'M') {
 			turn_off_ncurses();
-            cout << "There is a MONSTER! Prepare to fight!" << endl;
-			cin.get(); //wait for user to read the prompt and press enter when ready to continue,  so the output wont be messy 
+            cout << "There is a MONSTER! The Monster is unknown. PREPARE TO FIGHT!!" << endl;
+			cin.get(); //wait for user to read the prompt and press enter when ready to continue, so the output wont be messy 
 	  }	else if (collision == 'L') {
-            cout << "You found a LOOT!" << endl;
+            cout << "You found LOOT!" << endl;
         } else if (collision == '#') {
             cout << "You hit a WALL!" << endl;
 		}
 		 int choice = 0;
         cout << "Chose your Hero to fight the monster: " << endl;
 		cin.get();
-        print_Heroes(heroes);
+        cout << "Heroes: " << endl;
+		print_Heroes(heroes);
+		cout << "Monsters: " << endl;
+		print_Monsters(monsters);
 		cout << "1) Agent K" << endl;
 		cout << "2) John Wick" << endl;
         cin >> choice;
@@ -81,10 +84,19 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
         turn_on_ncurses();
 		
 	}
+	
+	void combat(vector<unique_ptr<Hero>> &heroes, vector<unique_ptr<Monster>>& monsters) {
+	//combat function between heroes vs monsters
+	
+	}
+
 int main() {
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
 populate_Heroes(heroes);
-	turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
+
+vector<unique_ptr<Monster>> monsters; //Holds data for the monsters 
+populate_Monsters(monsters);	
+    turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
@@ -132,7 +144,7 @@ populate_Heroes(heroes);
 		//Stop flickering by only redrawing on a change
 		if (x != old_x or y != old_y) {
 			if (map.get_character(x,y) == 'M') {
-			interact(map,x,y,'M', heroes);
+			interact(map,x,y,'M', heroes, monsters);
 			}
 			if (map.get_character(x,y) == Map::WALL) {
 				x = old_x;
