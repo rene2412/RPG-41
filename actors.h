@@ -57,7 +57,7 @@ class Monster : public Actor{
 
 class Hero : public Actor{
 	private:
-		string heroType;
+		 string heroType;
 		int money = 0;
 		int lvl = 1;
 	public:
@@ -70,12 +70,19 @@ Hero() : money(0), lvl(1) {}
 	void setMoney(int newMoney) {
 		money = newMoney;
 	}
-};
+	const int getLevel() const { return lvl; }
+ const string getHeroType() const { return heroType; }
+	};
 
-void populateHeroes(vector<unique_ptr<Hero>>& heroes) {
+void populate_Heroes(vector<unique_ptr<Hero>>& heroes) {
   // create heroes and add them to the vector
   heroes.push_back(make_unique<Hero>("Agent K", "Blade-Runner", 100, 23, 50, 10));
   heroes.push_back(make_unique<Hero>("John Wick", "Hitman", 150, 30, 70, 20));
 }
+ void print_Heroes(const vector<unique_ptr<Hero>>& heroes) {
+	for (const auto& hero : heroes) {
+	cout << "Name: " << hero->getName() <<  " | Type: " << hero->getHeroType() << " | HP: " << hero->getHp() << " | Speed: " << hero->getSpeed() << " | Damage: " << hero->getDmg() << " | Money: " << hero->getMoney() << " | Level: " << hero->getLevel() << endl; 
+	}
+ }
 
 //WE NEED TO MAEK THE DIFFERENT TYPES FOR MONSTERS AND HEROS AND JUST GIVE THEM MULTIPLIERS TO DAMAGE ETC BANDITS CAN STEAL MONEY AND MONSTERS DO EXTRA DMG // MAGES DO EXTRA MAGIC DMG AND ARE WEAKER DEFENSE // CHADS ARE GOOD AT DMG THTHATS IT

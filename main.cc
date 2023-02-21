@@ -34,46 +34,74 @@ void turn_off_ncurses() {
 	endwin(); // End curses mode
 	if (system("clear")) {}
 }
-
-void interact(Map& curMap,int x , int y, char z){
-	if(curMap.get_character(x,y) == z){
-		turn_off_ncurses();
-//		string s;
-//		cin >> s;
-//		cout << s << endl;
-		if(z == '$'){
-			cout << "you picked up moneees " << endl;
-			curMap.set_character(y,x,'.');//set spot empty
-		}
-		if(z == 'M'){//if collision is with monster
-			cout << "time to fight" << endl;
-			cout << "you slayed the beast" << endl;
-			curMap.set_character(y,x,'.');//set spot empty
-		}
-		sleep(1);
-		turn_on_ncurses();		
-	}
+void check() {
+cout << "BAD INPUT! Please select a valid Hero" << endl;
+exit(1);
 }
-
-
+void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes) {
+    turn_off_ncurses();
+	if (curMap.get_character(x, y) == collision) {
+        if (collision == 'M') {
+			turn_off_ncurses();
+            cout << "There is a MONSTER! Prepare to fight!" << endl;
+			cin.get(); //wait for user to read the prompt and press enter when ready to continue,  so the output wont be messy 
+	  }	else if (collision == 'L') {
+            cout << "You found a LOOT!" << endl;
+        } else if (collision == '#') {
+            cout << "You hit a WALL!" << endl;
+		}
+		 int choice = 0;
+        cout << "Chose your Hero to fight the monster: " << endl;
+		cin.get();
+        print_Heroes(heroes);
+		cout << "1) Agent K" << endl;
+		cout << "2) John Wick" << endl;
+        cin >> choice;
+        if (!cin or choice > heroes.size() or choice < 1) check();
+        //Hero* selectedHero points to the object of heroes[choice - 1]
+		//Since index start at 1, we subtrcat 1 from the users choice to get the right index 
+		//NOTE: selectedHero now holds the users hero choice and holds the heros stats
+		//Finally .get() gets the pointer that was stored in the unique_ptr vector 
+		Hero* selectedHero = heroes[choice - 1].get();
+        cout << "You have selected: "<< selectedHero->getName() << " as your Hero!" << endl;
+		cin.get();
+		int ready = 0;
+		cout << "Press 5) to fight the monster or 6) to Quit" << endl;
+		cin >> ready;
+		if (ready == 5) { 
+		clear();
+		//This will be our combat function
+		}
+		else if (ready == 6) {
+			exit(1);
+		}
+        curMap.set_character(y, x, '.');
+	}
+		sleep(10);
+        turn_on_ncurses();
+		
+	}
 int main() {
-vector<unique_ptr<Hero>> heroes;
-populateHeroes(heroes);
-turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
+vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
+populate_Heroes(heroes);
+	turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
-	map.set_character(20,20,'$');
+  	map.set_character(20,20,'$');
 	map.set_character(20,21,'L');
-	map.set_character(20,22,'M');
+	map.set_character(45,45,'M');
 	map.set_character(20,23,'L');
 	map.set_character(20,24,'M');
 	map.set_character(20,25,'L');
 	map.set_character(21,20,'#');
 	map.set_character(21,22,'#');
+	bool quit = false;
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
-		if (ch == 'q' || ch == 'Q') break;
+		if (ch == 'q' || ch == 'Q') { 
+			quit == true; break; 
+		} 
 		else if (ch == RIGHT) {
 			x++;
 			if (x >= Map::SIZE) x = Map::SIZE - 1; //Clamp value
@@ -103,18 +131,9 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 		}
 		//Stop flickering by only redrawing on a change
 		if (x != old_x or y != old_y) {
-			interact(map,x,y,'M');
-			interact(map,x,y,'$');
-			/*Do something like this, idk 
-			if (map.get_character(x,y) == 'L') {
-				turn_off_ncurses();
-				string s;
-				cout << "ITS A MONSTER" << endl;
-				cin >> s;
-				cout << s << endl;
-				sleep(1);
-				turn_on_ncurses();
-			} */
+			if (map.get_character(x,y) == 'M') {
+			interact(map,x,y,'M', heroes);
+			}
 			if (map.get_character(x,y) == Map::WALL) {
 				x = old_x;
 				y = old_y;
