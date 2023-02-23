@@ -57,8 +57,8 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 		print_Heroes(heroes);
 		cout << "Monsters: " << endl;
 		print_Monsters(monsters);
-		cout << "1) Agent K" << endl;
-		cout << "2) John Wick" << endl;
+		cout << "1) Supa " << endl;
+		cout << "2) Agent-K " << endl;
         cin >> choice;
         if (!cin or choice > heroes.size() or choice < 1) check();
         //Hero* selectedHero points to the object of heroes[choice - 1]

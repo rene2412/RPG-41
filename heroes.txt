@@ -1,2 +1,2 @@
-supa person 100 10 10 10 10
-Agent Blade-Runner 100 23 50 25 10
+Supa person 100 10 10 10 10
+Agent-K Blade-Runner 100 23 50 25 10
