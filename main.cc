@@ -47,8 +47,6 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 			cin.get(); //wait for user to read the prompt and press enter when ready to continue, so the output wont be messy 
 	  }	else if (collision == '$') {
             cout << "You found LOOT!" << endl;
-        } else if (collision == '#') {
-            cout << "You hit a WALL!" << endl;
 		}
 		 int choice = 0;
         cout << "Chose your Hero to fight the monster: " << endl;
@@ -72,7 +70,7 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 		cout << "Press 5) to fight the monster or 6) to Quit" << endl;
 		cin >> ready;
 		if (ready == 5) { 
-		clear();
+		cout << "going back \n";
 		//This will be our combat function
 		}
 		else if (ready == 6) {
@@ -82,9 +80,12 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 			exit(1);
 		}
         curMap.set_character(y, x, '.');
-	}
-		sleep(10);
+        curMap.set_character(50, 20, 'L');
+        curMap.set_character(50, 21, 'L');
+        curMap.set_character(50, 22, 'L');
+		sleep(1);
         turn_on_ncurses();
+	}
 		
 	}
 	

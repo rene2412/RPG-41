@@ -19,6 +19,22 @@ class Map {
 		return map.at(y).at(x);
 	}
 
+	void load_map(){
+	ifstream ifs("map.txt");
+	int i = 0;
+	int j = 0;
+	while(!ifs.eof()){
+			char temp;
+			ifs >> temp;
+			if (i == SIZE/2 and j == SIZE/2){map.at(i).at(j) = HERO;}
+			else map.at(i).at(j) = temp; 
+			if (j < 100) j++;
+			if (j == 100){i++; j = 0;}
+			if (i >= 100) break;
+	}
+	ifs.close();
+}
+
 	void save_map(){
 		ofstream ofs("map.txt");
 		if(ofs.is_open()){
@@ -26,11 +42,12 @@ class Map {
 			for (size_t j = 0; j < SIZE; j++) {
 			ofs << map.at(i).at(j);
 			}
-		cout << endl;
+		ofs << endl;
 		}
 	ofs.close();
 	}
 }
+
 
 	//TODO: Write a function to save the map and reload the map
 	static const char HERO     = 'H';
@@ -132,5 +149,6 @@ class Map {
 	}
 	Map() {
 		init_map();
+		load_map();
 	}
 };
