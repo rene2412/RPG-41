@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <random>
+#include<fstream>
 #include <ncurses.h>
 using namespace std; //Boo hiss
 
@@ -17,6 +18,19 @@ class Map {
 	char get_character(int x , int y){
 		return map.at(y).at(x);
 	}
+
+	void save_map(){
+		ofstream ofs("map.txt");
+		if(ofs.is_open()){
+		for (size_t i = 0; i < SIZE; i++) {
+			for (size_t j = 0; j < SIZE; j++) {
+			ofs << map.at(i).at(j);
+			}
+		cout << endl;
+		}
+	ofs.close();
+	}
+}
 
 	//TODO: Write a function to save the map and reload the map
 	static const char HERO     = 'H';

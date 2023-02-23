@@ -78,6 +78,7 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 		else if (ready == 6) {
 			save_Heroes(heroes);
 			save_Monsters(monsters);
+			curMap.save_map();
 			exit(1);
 		}
         curMap.set_character(y, x, '.');
