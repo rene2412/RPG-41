@@ -163,4 +163,14 @@ void save_Monsters(vector<unique_ptr<Monster>>& monsters){
 			cout << "Name: " << monster->getName() << " | Type: " << monster->getMonsterType() << " | HP: " << monster->getHp() << " | Speed: " << monster->getSpeed() << " | Damage: " << monster->getDmg() << " | Level: " << monster-> getMonsterLevel() << endl;
 		}
 	}
-//WE NEED TO MAEK THE DIFFERENT TYPES FOR MONSTERS AND HEROS AND JUST GIVE THEM MULTIPLIERS TO DAMAGE ETC BANDITS CAN STEAL MONEY AND MONSTERS DO EXTRA DMG // MAGES DO EXTRA MAGIC DMG AND ARE WEAKER DEFENSE // CHADS ARE GOOD AT DMG THTHATS IT
+void populate_all(vector<shared_ptr<Actor>>& all,vector<unique_ptr<Monster>>& monsters,vector<unique_ptr<Hero>>& heroes){
+	Hero B;
+	Monster A;
+	for (const auto& x : heroes){
+	all.push_back(make_shared<Hero>(B));
+	}
+	for (const auto& x : monsters){
+	all.push_back(make_shared<Monster>(A));
+	}
+
+}

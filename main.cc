@@ -99,7 +99,10 @@ vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
 populate_Heroes(heroes);
 
 vector<unique_ptr<Monster>> monsters; //Holds data for the monsters 
-populate_Monsters(monsters);	
+populate_Monsters(monsters);
+
+vector<shared_ptr<Actor>> all;
+populate_all(all,monsters,heroes);
     turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
