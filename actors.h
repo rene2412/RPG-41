@@ -7,7 +7,7 @@
 using namespace std;
 
 
-class Actor{
+class Actor {
 	protected: 
 	string actorName;
 	int hp = 0;
@@ -52,7 +52,7 @@ class Actor{
 
 };
 
-class Monster : public Actor{
+class Monster : public Actor {
 	private:
 		string MonsterType;
 		int MonsterLvl = 0;// MIGHT DO DIFFERENT LEVEL MONSTER FOR DIFFERENT LEVEL DIFFICULTY
