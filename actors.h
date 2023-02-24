@@ -176,10 +176,15 @@ void populate_all(vector<shared_ptr<Actor>>& all,vector<unique_ptr<Monster>>& mo
 	for (const auto& x : monsters){
 	all.push_back(make_shared<Monster>(*x));
 	}
-	for (const auto&x : all) {  // NOTE: cannot access the type here bc type is not member function of the Actor class (Tough Scene) we can do something else
+/*	for (const auto&x : all) {  // NOTE: cannot access the type here bc type is not member function of the Actor class (Tough Scene) we can do something else
 	cout << "Name: " <<  (*x).getName() << " | HP: " <<  (*x).getHp()  << " | Speed: " << (*x).getSpeed() << " | Damage: " << (*x).getDmg() <<  endl;
-	}
+	}*/
 	// we probably dont need to print them out but I did to test it.
 	// Sorting is next?????? idk goodnight fkjfkrjfkrnhfk
+}
+void print_all(vector<shared_ptr<Actor>>& all){
+	for (const auto&x : all){
+	cout << "Name: " <<  (*x).getName() << " | HP: " <<  (*x).getHp()  << " | Speed: " << (*x).getSpeed() << " | Damage: " << (*x).getDmg() <<  endl;
+	}
 }
 

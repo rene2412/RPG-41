@@ -5,6 +5,7 @@
 #include "map.h"
 #include <unistd.h>
 #include "actors.h"
+#include<algorithm>
 const int MAX_FPS = 90; //Cap frame rate 
 const unsigned int TIMEOUT = 10; //Milliseconds to wait for a getch to finish
 const int UP = 65; //Key code for up arrow
@@ -93,6 +94,9 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 	//combat function between heroes vs monsters
 	
 	}
+bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
+	return lhs->getSpeed() < rhs->getSpeed();
+}
 
 int main() {
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
@@ -103,6 +107,13 @@ populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
+print_all(all);
+sort(all.rbegin(),all.rend(),speed_sort);
+cout << endl;
+print_all(all);
+
+
+
 /*    
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
