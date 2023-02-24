@@ -103,7 +103,8 @@ populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
-    turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
+/*    
+turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
@@ -130,14 +131,14 @@ populate_all(all,monsters,heroes);
 			if (x < 0) x = 0;
 		}
 		else if (ch == UP) {
-			/*If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
+			If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
 			turn_off_ncurses();
 			string s;
 			cin >> s;
 			cout << s << endl;
 			sleep(1);
 			turn_on_ncurses();
-			*/
+		
 			y--;
 			if (y < 0) y = 0;
 		}
@@ -167,4 +168,5 @@ populate_all(all,monsters,heroes);
 		usleep(1'000'000/MAX_FPS);
 	}
 	turn_off_ncurses();
+*/
 }

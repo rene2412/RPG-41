@@ -164,13 +164,22 @@ void save_Monsters(vector<unique_ptr<Monster>>& monsters){
 		}
 	}
 void populate_all(vector<shared_ptr<Actor>>& all,vector<unique_ptr<Monster>>& monsters,vector<unique_ptr<Hero>>& heroes){
-	Hero B;
-	Monster A;
+
 	for (const auto& x : heroes){
-	all.push_back(make_shared<Hero>(B));
+	all.push_back(make_shared<Hero>(*x)); //Basically, shared pointers mean that it contains pointers to objects 
+	//we take in a pointer x since an object of Hero cant be stored directly into the vector. However, shared_ptr derefences Hero and creates a new object that is valid to now enter the vector 
+	//therefore to access a shared pointer (I only know one way at the moment lol) we cant use ->. Because the arrow operator allows access to all member functions. which is 
+	//invalid for shared_pointers. We pretty much need special premission to access our new shared_ptr vector now. We do that by deferencing using the *. 
+	//Which allows access for member function like getName to enter the new vector. Hope this little explanation helped :D
+	//Now that Im reading it back it sounds confusing 🗿. I can explain better over call lol
 	}
 	for (const auto& x : monsters){
-	all.push_back(make_shared<Monster>(A));
+	all.push_back(make_shared<Monster>(*x));
 	}
-
+	for (const auto&x : all) {  // NOTE: cannot access the type here bc type is not member function of the Actor class (Tough Scene) we can do something else
+	cout << "Name: " <<  (*x).getName() << " | HP: " <<  (*x).getHp()  << " | Speed: " << (*x).getSpeed() << " | Damage: " << (*x).getDmg() <<  endl;
+	}
+	// we probably dont need to print them out but I did to test it.
+	// Sorting is next?????? idk goodnight fkjfkrjfkrnhfk
 }
+
