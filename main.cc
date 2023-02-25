@@ -3,6 +3,7 @@
 //Delete this next line to let the code compile
 //#error Delete This!
 #include "map.h"
+#include "linked_list.h"
 #include <unistd.h>
 #include "actors.h"
 #include<algorithm>
@@ -99,6 +100,7 @@ bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
 }
 
 int main() {
+linkedList list;
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
 populate_Heroes(heroes);
 
@@ -107,10 +109,14 @@ populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
-print_all(all);
+//print_all(all);
 sort(all.rbegin(),all.rend(),speed_sort);
-cout << endl;
-print_all(all);
+//cout << endl;
+//print_all(all);
+//for (const auto& x : all){
+//	list.push_back(*x);
+//}
+//list.printLL();
 
 
 
