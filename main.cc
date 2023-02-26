@@ -124,7 +124,10 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
 		if (ch == 'q' || ch == 'Q') { 
-			quit == true; break; 
+			save_Heroes(heroes);
+			save_Monsters(monsters);
+			map.save_map();
+			exit(1);
 		} 
 		else if (ch == RIGHT) {
 			x++;
