@@ -109,14 +109,13 @@ populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
-//print_all(all);
+print_all(all);
 sort(all.rbegin(),all.rend(),speed_sort);
-//cout << endl;
-//print_all(all);
-//for (const auto& x : all){
-//	list.push_back(*x);
-//}
-//list.printLL();
+cout << endl;
+print_all(all);
+list.push_back(10);
+list.push_back(20);
+list.printLL();
 
 
 

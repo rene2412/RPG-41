@@ -9,10 +9,11 @@ using namespace std;
 class linkedList {
 	private:
 		struct Node{
-		Actor *a;
+		//Actor *a; //holds a ptr to either a hero or monster?
+		int a = 0;
 		Node *next = nullptr;
 		Node *prev = nullptr;
-		Node(Actor *newa = 0, Node *new_next = 0, Node *new_prev = 0) : a(newa), next(new_next), prev(new_prev){}
+		Node(int newa = 0, Node *new_next = nullptr, Node *new_prev = nullptr) : a(newa), next(new_next), prev(new_prev){}
 		};
 	public:
 	Node *head = nullptr;
@@ -27,23 +28,27 @@ class linkedList {
 		}
 	}
 
-	void push_back(Actor* actPtr){
-		tail = new Node(actPtr, head,tail); // new tail node whos prev is old tail and next is head node
-		if(head = nullptr){// if head is null ie: list is empty then head or prev's next is the new tail
-			head = tail;
-		}	
-		tail->prev->next = tail;
-		head->prev = tail;
+	void push_back(int x) {
+		Node* new_node = new Node(x, nullptr, tail); // new tail node whos prev is old tail and next is head node
+		if (tail != nullptr) {  // if list is not empty, then the next tail is set to new node
+			tail->next = new_node; 
+		}
+			tail = new_node; // else new node equal to tail
+		
+		if (head == nullptr) { // if list is empty then new node is equal to head 
+			head = new_node;
+		}
 	}
 void printLL(){
-	if(head != nullptr){
-	Node* temp = head;
-	cout << temp;
-	temp = temp->next;
-	while(temp != head){
-		cout << temp;
+	if(head != nullptr) { // checks if the head pointer is pointing to a valid memory address, in basic terms checking if list is not empty so it can do stuff
+	Node* temp = head; // temp ptr it set to head
+	cout << temp-> a << " "; // prints out the temp value which is the head (first point of list), and gets the variable of a
+	temp = temp->next; // temp is now set to the next node
+	while(temp != nullptr) { 
+		cout << temp->a << " ";
 		temp = temp->next;
 		}
+		cout << endl;
 	}
 }
 
