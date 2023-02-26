@@ -28,7 +28,7 @@ class linkedList {
 	}
 
 	void push_back(shared_ptr<Actor> x) {
-		Node* new_node = new Node(x, nullptr, tail); // new tail node whos prev is old tail and next is head node
+		Node* new_node = new Node(x, head, tail); // new tail node whos prev is old tail and next is head node
 		if (tail != nullptr) {  // if list is not empty, then the next tail is set to new node
 			tail->next = new_node; 
 		}
@@ -44,20 +44,13 @@ class linkedList {
 	Node* temp = head; // temp ptr it set to head
 	cout << temp->a->getName() << " "; // prints out the temp value which is the head (first point of list), and gets the variable of a
 	temp = temp->next; // temp is now set to the next node
-	while(temp != nullptr) { 
+	while(temp != nullptr ) { 
 		cout << temp->a->getName() << " ";
 		temp = temp->next;
 		}
-		cout << endl;
 	}
 }
 	
 };
-
-	 void all_linkedlist (vector<shared_ptr<Actor>> &all, linkedList &list) {
-        for (const auto &everything : all) {
-            list.push_back(everything);
-        }
-    }
 
 

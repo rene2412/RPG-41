@@ -82,9 +82,6 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 			exit(1);
 		}
         curMap.set_character(y, x, '.');
-        curMap.set_character(50, 20, 'L');
-        curMap.set_character(50, 21, 'L');
-        curMap.set_character(50, 22, 'L');
 		sleep(1);
         turn_on_ncurses();
 	}
@@ -115,20 +112,13 @@ print_all(all);
 for (const auto& x : all){
 	list.push_back(x);
 }
-list.printLL();
+//list.printLL();
 
-/*    
+   
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
-  	map.set_character(20,20,'$');
-	map.set_character(20,21,'L');
-	map.set_character(45,45,'M');
-	map.set_character(20,23,'L');
-	map.set_character(20,24,'M');
-	map.set_character(20,25,'L');
-	map.set_character(21,20,'#');
 	map.set_character(21,22,'#');
 	bool quit = false;
 	while (true) {
@@ -145,14 +135,6 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 			if (x < 0) x = 0;
 		}
 		else if (ch == UP) {
-			If you want to do cin and cout, turn off ncurses, do your thing, then turn it back on
-			turn_off_ncurses();
-			string s;
-			cin >> s;
-			cout << s << endl;
-			sleep(1);
-			turn_on_ncurses();
-		
 			y--;
 			if (y < 0) y = 0;
 		}
@@ -182,5 +164,4 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 		usleep(1'000'000/MAX_FPS);
 	}
 	turn_off_ncurses();
-*/
 }
