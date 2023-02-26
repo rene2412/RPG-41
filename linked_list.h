@@ -42,10 +42,10 @@ class linkedList {
 	void printLL() {
 	if(head != nullptr) { // checks if the head pointer is pointing to a valid memory address, in basic terms checking if list is not empty so it can do stuff
 	Node* temp = head; // temp ptr it set to head
-	cout << temp-> a << " "; // prints out the temp value which is the head (first point of list), and gets the variable of a
+	cout << temp->a->getName() << " "; // prints out the temp value which is the head (first point of list), and gets the variable of a
 	temp = temp->next; // temp is now set to the next node
 	while(temp != nullptr) { 
-		cout << temp->a << " ";
+		cout << temp->a->getName() << " ";
 		temp = temp->next;
 		}
 		cout << endl;

@@ -108,16 +108,14 @@ vector<unique_ptr<Monster>> monsters; //Holds data for the monsters
 populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
-/*
-populate_all(all,monsters,heroes);
-print_all(all);
-sort(all.rbegin(),all.rend(),speed_sort);
-cout << endl;
-print_all(all);
-*/
-//list.printLL();
-all_linkedlist(all, list);
 
+populate_all(all,monsters,heroes);
+sort(all.rbegin(),all.rend(),speed_sort);
+print_all(all);
+for (const auto& x : all){
+	list.push_back(x);
+}
+list.printLL();
 
 /*    
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
