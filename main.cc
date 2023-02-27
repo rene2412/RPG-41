@@ -1,12 +1,11 @@
 //Put your name(s) here: Rene Hernandez
 //What bullet points did you do: 1, 2, 3, 4, 5 + 2 extra credit bullets
-//Delete this next line to let the code compile
-//#error Delete This!
 #include "map.h"
 #include "linked_list.h"
+#include "combat.h"
 #include <unistd.h>
 #include "actors.h"
-#include<algorithm>
+#include <algorithm>
 const int MAX_FPS = 90; //Cap frame rate 
 const unsigned int TIMEOUT = 10; //Milliseconds to wait for a getch to finish
 const int UP = 65; //Key code for up arrow
@@ -51,22 +50,17 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
             cout << "You found LOOT!" << endl;
 		}
 		 int choice = 0;
-        cout << "Chose your Hero to fight the monster: " << endl;
 		cin.get();
         cout << "Heroes: " << endl;
 		print_Heroes(heroes);
 		cout << "Monsters: " << endl;
 		print_Monsters(monsters);
-		cout << "1) Supa " << endl;
-		cout << "2) Agent-K " << endl;
         cin >> choice;
         if (!cin or choice > heroes.size() or choice < 1) check();
         //Hero* selectedHero points to the object of heroes[choice - 1]
 		//Since index start at 1, we subtrcat 1 from the users choice to get the right index 
 		//NOTE: selectedHero now holds the users hero choice and holds the heros stats
 		//Finally .get() gets the pointer that was stored in the unique_ptr vector 
-		Hero* selectedHero = heroes[choice - 1].get();
-        cout << "You have selected: "<< selectedHero->getName() << " as your Hero!" << endl;
 		cin.get();
 		int ready = 0;
 		cout << "Press 5) to fight the monster or 6) to Quit" << endl;
@@ -88,15 +82,12 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 		
 	}
 	
-	void combat(vector<unique_ptr<Hero>> &heroes, vector<unique_ptr<Monster>>& monsters) {
-	//combat function between heroes vs monsters
-	
-	}
-bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
-	return lhs->getSpeed() < rhs->getSpeed();
+	bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
+	return lhs->getSpeed() <  rhs->getSpeed();
 }
 
 int main() {
+
 linkedList list;
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
 populate_Heroes(heroes);
@@ -105,16 +96,18 @@ vector<unique_ptr<Monster>> monsters; //Holds data for the monsters
 populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
-
 populate_all(all,monsters,heroes);
-sort(all.rbegin(),all.rend(),speed_sort);
-print_all(all);
+sort(all.rbegin(), all.rend(), speed_sort);
+//print_all(all);
 for (const auto& x : all){
 	list.push_back(x);
 }
 //list.printLL();
+begin_combat(list, heroes, monsters);
 
-   
+
+/*
+
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
@@ -167,4 +160,5 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 		usleep(1'000'000/MAX_FPS);
 	}
 	turn_off_ncurses();
+*/
 }

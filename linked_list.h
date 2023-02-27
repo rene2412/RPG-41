@@ -19,15 +19,8 @@ class linkedList {
 	Node *tail = nullptr;
 
 	 linkedList(){};
-	~linkedList(){
-	 Node* current = head;
-   	    while (current != nullptr) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-    	}
-	}
-	void push_back(shared_ptr<Actor> x) {
+	
+	 void push_back(shared_ptr<Actor> x) {
 		Node* new_node = new Node(x, nullptr, tail); // new tail node whos prev is old tail and next is head node
 		if (tail != nullptr) {  // if list is not empty, then the next tail is set to new node
 			tail->next = new_node; 
