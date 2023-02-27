@@ -39,37 +39,36 @@ void check() {
 cout << "BAD INPUT! Please select a valid Hero" << endl;
 exit(1);
 }
+void exitSave(){
+}
 void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes, vector<unique_ptr<Monster>>& monsters) {
     turn_off_ncurses();
+	int select = 0;
 	if (curMap.get_character(x, y) == collision) {
-        if (collision == 'M') {
-			turn_off_ncurses();
+        int ready = 0;
+		if (collision == 'M') {
             cout << "There is a MONSTER! The Monster is unknown. PREPARE TO FIGHT!!" << endl;
-			cin.get(); //wait for user to read the prompt and press enter when ready to continue, so the output wont be messy 
-	  }	else if (collision == '$') {
-            cout << "You found LOOT!" << endl;
+			cout << "Press 5) to fight the monster or 6) to Quit" << endl;
+			cin >> ready;
+			if (!cin) exit(1);
+			//int choice = 0;
+        	//cin >> choice;
+        	//if (!cin or choice > heroes.size() or choice < 1) check();
+        	//Hero* selectedHero points to the object of heroes[choice - 1]
+			//Since index start at 1, we subtrcat 1 from the users choice to get the right index 
+			//NOTE: selectedHero now holds the users hero choice and holds the heros stats
+			//Finally .get() gets the pointer that was stored in the unique_ptr vector 
+			//cin.get();
+			//cin >> choice;
+			if (ready == 5) { 
+				cout << "going back \n";
+				ready = 0;
+				//This will be our combat function
+			}
+			if (ready == 6) select = 6;
 		}
-		 int choice = 0;
-		cin.get();
-        cout << "Heroes: " << endl;
-		print_Heroes(heroes);
-		cout << "Monsters: " << endl;
-		print_Monsters(monsters);
-        cin >> choice;
-        if (!cin or choice > heroes.size() or choice < 1) check();
-        //Hero* selectedHero points to the object of heroes[choice - 1]
-		//Since index start at 1, we subtrcat 1 from the users choice to get the right index 
-		//NOTE: selectedHero now holds the users hero choice and holds the heros stats
-		//Finally .get() gets the pointer that was stored in the unique_ptr vector 
-		cin.get();
-		int ready = 0;
-		cout << "Press 5) to fight the monster or 6) to Quit" << endl;
-		cin >> ready;
-		if (ready == 5) { 
-		cout << "going back \n";
-		//This will be our combat function
-		}
-		else if (ready == 6) {
+		else if (collision == '$') cout << "You found LOOT!" << endl;
+		if (select == 6) {
 			save_Heroes(heroes);
 			save_Monsters(monsters);
 			curMap.save_map();
@@ -80,7 +79,7 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
         turn_on_ncurses();
 	}
 		
-	}
+}
 	
 	bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
 	return lhs->getSpeed() <  rhs->getSpeed();
@@ -98,15 +97,9 @@ populate_Monsters(monsters);
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
 sort(all.rbegin(), all.rend(), speed_sort);
-//print_all(all);
 for (const auto& x : all){
 	list.push_back(x);
 }
-//list.printLL();
-begin_combat(list, heroes, monsters);
-
-
-/*
 
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	Map map;
@@ -146,6 +139,9 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 			if (map.get_character(x,y) == 'M') {
 			interact(map,x,y,'M', heroes, monsters);
 			}
+			if (map.get_character(x,y) == '$') {
+			interact(map,x,y,'$', heroes, monsters);
+			}
 			if (map.get_character(x,y) == Map::WALL) {
 				x = old_x;
 				y = old_y;
@@ -160,5 +156,4 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 		usleep(1'000'000/MAX_FPS);
 	}
 	turn_off_ncurses();
-*/
 }
