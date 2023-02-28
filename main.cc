@@ -41,7 +41,7 @@ void check() {
 cout << "BAD INPUT! Please select a valid Hero" << endl;
 exit(1);
 }
-void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes, vector<unique_ptr<Monster>>& monsters) {
+void interact(Map& curMap, int x, int y, char collision, vector<shared_ptr<Hero>>& heroes, vector<shared_ptr<Monster>>& monsters) {
     turn_off_ncurses();
 	int select = 0;
 	if (curMap.get_character(x, y) == collision) {
@@ -75,33 +75,44 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 	bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
 	return lhs->getSpeed() <  rhs->getSpeed();
 }
-	 bool speed_sort2(const unique_ptr<Hero> &lhs, const unique_ptr<Hero> &rhs){
+	 bool speed_sort2(const shared_ptr<Hero> &lhs, const shared_ptr<Hero> &rhs){
+    return lhs->getSpeed() <  rhs->getSpeed();
+}
+	bool speed_sort3(const shared_ptr<Monster> &lhs, const shared_ptr<Monster> &rhs){
     return lhs->getSpeed() <  rhs->getSpeed();
 }
 int main() {
 
 linkedList list;
-vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
+Hero_linkedList list2;
+Monster_linkedList list3;
+vector<shared_ptr<Hero>> heroes; //Holds data for the heroes
 
-vector<unique_ptr<Monster>> monsters; //Holds data for the monsters 
+vector<shared_ptr<Monster>> monsters; //Holds data for the monsters 
 populate_Heroes(heroes,0); //test
 populate_Monsters(monsters,0); //test
 vector<shared_ptr<Actor>> all; //Holds data for all
 populate_all(all,monsters,heroes);
-//cout << "This is unsorted: " << endl;
-//print_all(all);
 sort(all.rbegin(), all.rend(), speed_sort);
 sort(heroes.rbegin(), heroes.rend(), speed_sort2);
+sort(monsters.rbegin(), monsters.rend(), speed_sort3);
 cout << "This is sorted: "  << endl;
-print_all(all);
+print_all(all); cout << endl;
+cout << "This is the sorted Heroes: " << endl;
+print_Heroes(heroes); cout << endl;
+cout << "This is the sorted Monsters: " << endl;
+print_Monsters(monsters); cout << endl;
 for (const auto& x : all){
 	list.push_back(x);
 }
-//for (const auto& y : heroes) { 
-//	list.push_back(y);
-//}
+for (const auto& y : heroes) { 
+	list2.push_back(y);
+}
+for (const auto& z : monsters) {
+	list3.push_back(z);
+	}
 //list.printLL();
-begin_combat(list, all, heroes, monsters);
+begin_combat(list, list2, list3, all, heroes, monsters);
 	}
 /*
 

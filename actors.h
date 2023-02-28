@@ -91,7 +91,7 @@ class Hero : public Actor{
  const string getHeroType() const { return heroType; }
 	};
 
-void populate_Heroes(vector<unique_ptr<Hero>>& heroes,int x) {
+void populate_Heroes(vector<shared_ptr<Hero>>& heroes,int x) {
  	string fileInput;// file stream for heroes and objects of it
 	string choice;
 	if (x == 0) choice = "dheroes.txt";
@@ -105,7 +105,7 @@ void populate_Heroes(vector<unique_ptr<Hero>>& heroes,int x) {
 			stringstream s(fileInput);
 			s >> name >> heroType >> hp >> speed >> dmg >> def >> money;
 			if(name == "")break;//check eof
-	heroes.push_back(make_unique<Hero>(name, heroType, stoi(hp) , stoi(speed), stoi(dmg),stoi(def),stoi(money)));
+	heroes.push_back(make_shared<Hero>(name, heroType, stoi(hp) , stoi(speed), stoi(dmg),stoi(def),stoi(money)));
 		}
 	fs.close();
 	}
@@ -114,7 +114,7 @@ void populate_Heroes(vector<unique_ptr<Hero>>& heroes,int x) {
   	//  heroes.push_back(make_unique<Hero>("Agent K", "Blade-Runner", 100, 23, 50,25, 10));
 }
 
-void save_Heroes(vector<unique_ptr<Hero>>& heroes){
+void save_Heroes(vector<shared_ptr<Hero>>& heroes){
 	ofstream ofs("heroes.txt");
 	//ofs << endl;
 	if(ofs.is_open()){
@@ -126,7 +126,7 @@ void save_Heroes(vector<unique_ptr<Hero>>& heroes){
 }
 
 
-void populate_Monsters(vector<unique_ptr<Monster>>& monsters,int x) {
+void populate_Monsters(vector<shared_ptr<Monster>>& monsters,int x) {
  	string fileInput;// Block of code to read in monsters from monsters.txt
 	string choice;
 	if (x == 0) choice = "dmonsters.txt";
@@ -140,7 +140,7 @@ void populate_Monsters(vector<unique_ptr<Monster>>& monsters,int x) {
 			stringstream s(fileInput);
 			s >> name >> monsterType >> hp >> speed >> dmg >> def >> monsterLvl;
 			if(name == "")break;//check eof
-monsters.push_back(make_unique<Monster>(name, monsterType, stoi(hp) , stoi(speed), stoi(dmg),stoi(def),stoi(monsterLvl)));
+monsters.push_back(make_shared<Monster>(name, monsterType, stoi(hp) , stoi(speed), stoi(dmg),stoi(def),stoi(monsterLvl)));
 		}
 	fs.close();
 	}
@@ -148,7 +148,7 @@ monsters.push_back(make_unique<Monster>(name, monsterType, stoi(hp) , stoi(speed
    //monsters.push_back(make_unique<Monster>("Bowser", "Turtle", 200, 10, 45, 25, 15));  
 }
 
-void save_Monsters(vector<unique_ptr<Monster>>& monsters){
+void save_Monsters(vector<shared_ptr<Monster>>& monsters){
 	ofstream ofs("monsters.txt");
 	//ofs << endl;
 	if(ofs.is_open()){
@@ -159,17 +159,17 @@ void save_Monsters(vector<unique_ptr<Monster>>& monsters){
 	}
 }
 
- void print_Heroes(const vector<unique_ptr<Hero>>& heroes) {
+ void print_Heroes(const vector<shared_ptr<Hero>>& heroes) {
 	 for (const auto& hero : heroes) {
 	cout << "Name: " << hero->getName() <<  " | Type: " << hero->getHeroType() << " | HP: " << hero->getHp() << " | Speed: " << hero->getSpeed() << " | Damage: " << hero->getDmg() << " | Money: " << hero->getMoney() << " | Defense:" << hero->getDef() <<  " | Level: " << hero->getLevel() << endl; 
-	}
+	}\
  }
-	void print_Monsters (vector<unique_ptr<Monster>>& monsters) { 
+	void print_Monsters (vector<shared_ptr<Monster>>& monsters) { 
 		for (const auto& monster : monsters) { 
 				cout << "Name: " << monster->getName() << " | Type: " << monster->getMonsterType() << " | HP: " << monster->getHp() << " | Speed: " << monster->getSpeed() << " | Damage: " << monster->getDmg() << " | Level: " << monster-> getMonsterLevel() << endl;
 		}
 	}
-void populate_all(vector<shared_ptr<Actor>>& all,vector<unique_ptr<Monster>>& monsters,vector<unique_ptr<Hero>>& heroes){
+void populate_all(vector<shared_ptr<Actor>>& all,vector<shared_ptr<Monster>>& monsters,vector<shared_ptr<Hero>>& heroes){
 
 	for (const auto& x : heroes){
 	all.push_back(make_shared<Hero>(*x)); //Basically, shared pointers mean that it contains pointers to objects 

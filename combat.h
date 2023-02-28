@@ -8,16 +8,17 @@
 #include <list>
 using namespace std;
 
-void begin_combat(linkedList &list, vector<shared_ptr<Actor>> &all, vector<unique_ptr<Hero>> &heroes, vector<unique_ptr<Monster>> &monsters) {
+void begin_combat(linkedList &list, Hero_linkedList &list2, Monster_linkedList& list3, vector<shared_ptr<Actor>> &all, vector<shared_ptr<Hero>> &heroes, vector<shared_ptr<Monster>> &monsters) {
   	 	
-	cout << "List ALL: " << endl;
+	cout << "List of Actors: " << endl;
 	list.printLL();
 	cin.get();
-	cout << "List Heroes: " << endl;
+	cout << "List of Heroes: " << endl;
 	// We need to sort via heroes and monsters SEPERATELY or else the combat will not ordered 
+	list2.printLL();
 	cin.get();
-	cout << "List Monsters: " << endl;
-	
+	cout << "List of Monsters: " << endl;
+	list3.printLL();
 	cin.get();
 	cout << "WELCOME TO THE FIGHT ZONE" << endl;
 	cin.get();
