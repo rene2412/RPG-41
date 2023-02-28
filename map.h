@@ -19,8 +19,11 @@ class Map {
 		return map.at(y).at(x);
 	}
 
-	void load_map(){
-	ifstream ifs("map.txt");
+	void load_map(int x){
+	string choice;
+	if (x == 0) choice = "dmap.txt";// reset and load default map
+	if (x == 1) choice = "map.txt";// load the saved map
+	ifstream ifs(choice);
 	int i = 0;
 	int j = 0;
 	while(!ifs.eof()){
@@ -130,7 +133,7 @@ class Map {
 				else {
 					int color = 1;
 					if (map.at(i).at(j) == WALL)
-						color = 5;
+						color =8 ;
 					else if (map.at(i).at(j) == WATER)
 						color = 2;
 					else if (map.at(i).at(j) == HERO)
@@ -139,6 +142,10 @@ class Map {
 						color = 4;
 					else if (map.at(i).at(j) == MONSTER)
 						color = 6;
+					else if (map.at(i).at(j) == OPEN)
+						color = 7;
+					else if (map.at(i).at(j) == '+')
+						color = 5;
 
 					attron(COLOR_PAIR(color));
 					mvaddch(i-start_y,j-start_x,map.at(i).at(j));
@@ -147,8 +154,8 @@ class Map {
 			}
 		}
 	}
-	Map() {
+	Map(int x) {
 		init_map();
-		load_map();
+		load_map(x);
 	}
 };

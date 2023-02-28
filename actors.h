@@ -9,11 +9,11 @@ using namespace std;
 
 class Actor {
 	protected: 
-	string actorName;
-	int hp = 0;
-	int speed = 0;
-	int dmg = 0;
-	int def = 0;
+		string actorName;
+		int hp = 0;
+		int speed = 0;
+		int dmg = 0;
+		int def = 0;
 	public:
 	Actor(){//No parameter cstor
 		actorName = "";
@@ -91,9 +91,12 @@ class Hero : public Actor{
  const string getHeroType() const { return heroType; }
 	};
 
-void populate_Heroes(vector<unique_ptr<Hero>>& heroes) {
+void populate_Heroes(vector<unique_ptr<Hero>>& heroes,int x) {
  	string fileInput;// file stream for heroes and objects of it
-	ifstream fs("heroes.txt");
+	string choice;
+	if (x == 0) choice = "dheroes.txt";
+	if (x == 1) choice = "heroes.txt";
+	ifstream fs(choice);
 	if(fs.is_open()){
 		while(!fs.eof()){
 			string name;string heroType;
@@ -123,9 +126,12 @@ void save_Heroes(vector<unique_ptr<Hero>>& heroes){
 }
 
 
-void populate_Monsters(vector<unique_ptr<Monster>>& monsters) {
+void populate_Monsters(vector<unique_ptr<Monster>>& monsters,int x) {
  	string fileInput;// Block of code to read in monsters from monsters.txt
-	ifstream fs("monsters.txt");
+	string choice;
+	if (x == 0) choice = "dmonsters.txt";
+	if (x == 1) choice = "monsters.txt";
+	ifstream fs(choice);
 	if(fs.is_open()){
 		while(!fs.eof()){
 			string name;string monsterType;
@@ -160,7 +166,7 @@ void save_Monsters(vector<unique_ptr<Monster>>& monsters){
  }
 	void print_Monsters (vector<unique_ptr<Monster>>& monsters) { 
 		for (const auto& monster : monsters) { 
-			cout << "Name: " << monster->getName() << " | Type: " << monster->getMonsterType() << " | HP: " << monster->getHp() << " | Speed: " << monster->getSpeed() << " | Damage: " << monster->getDmg() << " | Level: " << monster-> getMonsterLevel() << endl;
+				cout << "Name: " << monster->getName() << " | Type: " << monster->getMonsterType() << " | HP: " << monster->getHp() << " | Speed: " << monster->getSpeed() << " | Damage: " << monster->getDmg() << " | Level: " << monster-> getMonsterLevel() << endl;
 		}
 	}
 void populate_all(vector<shared_ptr<Actor>>& all,vector<unique_ptr<Monster>>& monsters,vector<unique_ptr<Hero>>& heroes){

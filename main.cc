@@ -23,6 +23,8 @@ void turn_on_ncurses() {
 	init_pair(4,COLOR_YELLOW,COLOR_BLACK);
 	init_pair(5,COLOR_RED,COLOR_BLACK);
 	init_pair(6,COLOR_MAGENTA,COLOR_BLACK);
+	init_pair(7,COLOR_BLACK,COLOR_BLACK);// FLOOR COLOR
+	init_pair(8,COLOR_MAGENTA,COLOR_BLACK);// GREEN
 	clear();
 	noecho();
 	cbreak();
@@ -38,8 +40,6 @@ void turn_off_ncurses() {
 void check() {
 cout << "BAD INPUT! Please select a valid Hero" << endl;
 exit(1);
-}
-void exitSave(){
 }
 void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>>& heroes, vector<unique_ptr<Monster>>& monsters) {
     turn_off_ncurses();
@@ -80,10 +80,8 @@ int main() {
 
 linkedList list;
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
-populate_Heroes(heroes);
 
 vector<unique_ptr<Monster>> monsters; //Holds data for the monsters 
-populate_Monsters(monsters);
 
 vector<shared_ptr<Actor>> all;
 populate_all(all,monsters,heroes);
@@ -91,12 +89,18 @@ sort(all.rbegin(), all.rend(), speed_sort);
 for (const auto& x : all){
 	list.push_back(x);
 }
+	cout << "WELCOME TO THE GAME\n" << "Press: 0 for a New game, Press: 1 to load a game" << endl;
+	int slct = 0;
+	cin >> slct;
+	if (slct>1 || slct < 0){cout << "SOmEtHinG WenT wRoNG " << endl; exit (0);} 
+	if (!cin){cout << "SOmEtHinG WenT wRoNG " << endl; exit (0);} 
+	Map map(slct);
+	populate_Heroes(heroes,slct);
+	populate_Monsters(monsters,slct);
 
 turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
-	Map map;
 	int x = Map::SIZE / 2, y = Map::SIZE / 2; //Start in middle of the world
 	int old_x = -1, old_y = -1;
-	map.set_character(21,22,'#');
 	bool quit = false;
 	while (true) {
 		int ch = getch(); // Wait for user input, with TIMEOUT delay
@@ -133,7 +137,7 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 			if (map.get_character(x,y) == '$') {
 			interact(map,x,y,'$', heroes, monsters);
 			}
-			if (map.get_character(x,y) == Map::WALL) {
+			if (map.get_character(x,y) == '/' or map.get_character(x,y) == '-' or map.get_character(x,y) == '+' or map.get_character(x,y) == '|' or map.get_character(x,y) == '\\') {
 				x = old_x;
 				y = old_y;
 			}
