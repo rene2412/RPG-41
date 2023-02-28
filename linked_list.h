@@ -35,17 +35,15 @@ class linkedList {
 	}
 
 	void printLL() {
-	if(head != nullptr) { // checks if the head pointer is pointing to a valid memory address, in basic terms checking if list is not empty so it can do stuff
-	Node* temp = head; // temp ptr it set to head
-	cout << temp->a->getName() << " "; // prints out the temp value which is the head (first point of list), and gets the variable of a
-	temp = temp->next; // temp is now set to the next node
-	while(temp != nullptr ) { 
-		cout << temp->a->getName() << " ";
-		temp = temp->next;
-		}
+	    if (head != nullptr) { //checks if list is valid 
+        Node* temp = head; // temp pointer is set to head  
+        do {
+            cout << temp->a->getName() << " " << endl; //prints the name of the current Actor that temps points too
+            temp = temp->next; // make temp get the next node
+        } while (temp != head); //checks until we reach the end of the circ linked list
+        cout << endl;
+    	}
 	}
-}
-	
 };
 
 

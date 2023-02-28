@@ -75,20 +75,36 @@ void interact(Map& curMap, int x, int y, char collision, vector<unique_ptr<Hero>
 	bool speed_sort(const shared_ptr<Actor> &lhs, const shared_ptr<Actor> &rhs){
 	return lhs->getSpeed() <  rhs->getSpeed();
 }
-
+	 bool speed_sort2(const unique_ptr<Hero> &lhs, const unique_ptr<Hero> &rhs){
+    return lhs->getSpeed() <  rhs->getSpeed();
+}
 int main() {
 
 linkedList list;
 vector<unique_ptr<Hero>> heroes; //Holds data for the heroes
 
 vector<unique_ptr<Monster>> monsters; //Holds data for the monsters 
-
-vector<shared_ptr<Actor>> all;
+populate_Heroes(heroes,0); //test
+populate_Monsters(monsters,0); //test
+vector<shared_ptr<Actor>> all; //Holds data for all
 populate_all(all,monsters,heroes);
+//cout << "This is unsorted: " << endl;
+//print_all(all);
 sort(all.rbegin(), all.rend(), speed_sort);
+sort(heroes.rbegin(), heroes.rend(), speed_sort2);
+cout << "This is sorted: "  << endl;
+print_all(all);
 for (const auto& x : all){
 	list.push_back(x);
 }
+//for (const auto& y : heroes) { 
+//	list.push_back(y);
+//}
+//list.printLL();
+begin_combat(list, all, heroes, monsters);
+	}
+/*
+
 	cout << "WELCOME TO THE GAME\n" << "Press: 0 for a New game, Press: 1 to load a game" << endl;
 	int slct = 0;
 	cin >> slct;
@@ -152,12 +168,4 @@ turn_on_ncurses(); //DON'T DO CIN or COUT WHEN NCURSES MODE IS ON
 	}
 	turn_off_ncurses();
 }
-			//int choice = 0;
-        	//cin >> choice;
-        	//if (!cin or choice > heroes.size() or choice < 1) check();
-        	//Hero* selectedHero points to the object of heroes[choice - 1]
-			//Since index start at 1, we subtrcat 1 from the users choice to get the right index 
-			//NOTE: selectedHero now holds the users hero choice and holds the heros stats
-			//Finally .get() gets the pointer that was stored in the unique_ptr vector 
-			//cin.get();
-			//cin >> choice;
+*/
