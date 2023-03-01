@@ -12,12 +12,11 @@ using namespace bridges;
 
 // helper function
 CircDLelement<StudentInfo> *insertFront(
-	CircDLelement<StudentInfo> *tailElement,
-	CircDLelement<StudentInfo> *newElement);
+    CircDLelement<StudentInfo> *tailElement,
+    CircDLelement<StudentInfo> *newElement);
 
 int main(int argc, char **argv) {
-    Bridges *bridges =  new Bridges(999, "herbart",
-                                "1415571625997");
+	Bridges *bridges =  new Bridges(100, "herbart","559698131650");
 
 
 
@@ -27,55 +26,55 @@ int main(int argc, char **argv) {
 	// student data
 	CircDLelement<StudentInfo> *students[] = {
 		new CircDLelement<StudentInfo>(
-			StudentInfo(
-				"00000000000",
-				"Gretel Chaney",
-				"CS",
-				"g.chaney@generated.com",
-				"magenta",
-				"blue",
-				9.0
-			), ""),
+		    StudentInfo(
+		        "00000000000",
+		        "Gretel Chaney",
+		        "CS",
+		        "g.chaney@generated.com",
+		        "magenta",
+		        "blue",
+		        9.0
+		    ), ""),
 		new CircDLelement<StudentInfo>(
-			StudentInfo(
-				"00000000001",
-				"Karol Soderman",
-				"SIS",
-				"k.soderman@generated.com",
-				"magenta",
-				"red",
-				11.0
-			), ""),
+		    StudentInfo(
+		        "00000000001",
+		        "Karol Soderman",
+		        "SIS",
+		        "k.soderman@generated.com",
+		        "magenta",
+		        "red",
+		        11.0
+		    ), ""),
 		new CircDLelement<StudentInfo>(
-			StudentInfo(
-				"00000000002",
-				"Lamont Kyler",
-				"BIO",
-				"l.kyler@generated.com",
-				"yellow",
-				"green",
-				12.0
-			), ""),
+		    StudentInfo(
+		        "00000000002",
+		        "Lamont Kyler",
+		        "BIO",
+		        "l.kyler@generated.com",
+		        "yellow",
+		        "green",
+		        12.0
+		    ), ""),
 		new CircDLelement<StudentInfo>(
-			StudentInfo(
-				"00000000003",
-				"Gladys Serino",
-				"CS",
-				"g.serino@generated.com",
-				"blue",
-				"magenta",
-				9.0
-			), ""),
+		    StudentInfo(
+		        "00000000003",
+		        "Gladys Serino",
+		        "CS",
+		        "g.serino@generated.com",
+		        "blue",
+		        "magenta",
+		        9.0
+		    ), ""),
 		new CircDLelement<StudentInfo>(
-			StudentInfo(
-				"00000000004",
-				"Starr Mcginn",
-				"CS",
-				"s.mcginn@generated.com",
-				"red",
-				"yellow",
-				15.0
-			), "")
+		    StudentInfo(
+		        "00000000004",
+		        "Starr Mcginn",
+		        "CS",
+		        "s.mcginn@generated.com",
+		        "red",
+		        "yellow",
+		        15.0
+		    ), "")
 	};
 
 	CircDLelement<StudentInfo> *head =  nullptr;
@@ -110,12 +109,12 @@ int main(int argc, char **argv) {
 	// visualize the circular list
 	bridges->visualize();
 
-	return 0;
+	return 1;
 }
 
 CircDLelement<StudentInfo> *insertFront(
-	CircDLelement<StudentInfo> *tailElement,
-	CircDLelement<StudentInfo> *newElement) {
+    CircDLelement<StudentInfo> *tailElement,
+    CircDLelement<StudentInfo> *newElement) {
 
 	CircDLelement<StudentInfo> *tailNextElement = tailElement->getNext();
 

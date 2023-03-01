@@ -83,7 +83,6 @@ void interact(Map& curMap, int x, int y, char collision, vector<shared_ptr<Hero>
     return lhs->getSpeed() <  rhs->getSpeed();
 }
 int main() {
-
 linkedList list;
 Hero_linkedList list2;
 Monster_linkedList list3;
