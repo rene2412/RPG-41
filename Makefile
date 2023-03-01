@@ -1,4 +1,4 @@
-a.out: main.cc map.h actors.h linked_list.h
+a.out: main.cc map.h actors.h linked_list.h combat.h
 	g++ -g -Og main.cc -lcurl -lncurses
 
 clean:

@@ -31,6 +31,7 @@ void turn_on_ncurses() {
 	timeout(TIMEOUT); //Set a max delay for key entry
 }
 
+	void die(){cout << "SOmEtHinG WenT wRoNG " << endl; exit (0);} 
 //Exit full screen mode - also do this if you ever want to use cout or gtest or something
 void turn_off_ncurses() {
 	clear();

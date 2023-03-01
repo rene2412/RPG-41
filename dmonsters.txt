@@ -1,3 +1,3 @@
 noob demon 20 33 20 20 10
 Arnold Terminator 100 37 40 32 10
-YO-MAMA Cow 100 42 100 100 1
+YO-MAMA Cow 100 999 100 100 1
