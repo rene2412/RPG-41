@@ -4,7 +4,6 @@
 #include <memory>
 #include <vector>
 using namespace std;
-//vector <shared_ptddr<Actor>> myList; //this holds our data for the linked list 
 
 class linkedList {
 		struct Node{
@@ -47,7 +46,6 @@ class linkedList {
 };
 class Hero_linkedList {
         struct Node{
-        //Actor *a; //holds a ptr to either a hero or monster?
         shared_ptr<Hero> a;
         Node *next = nullptr;
         Node *prev = nullptr;
@@ -87,7 +85,6 @@ class Hero_linkedList {
 
 class Monster_linkedList {
         struct Node{
-        //Actor *a; //holds a ptr to either a hero or monster?
         shared_ptr<Monster> a;
         Node *next = nullptr;
         Node *prev = nullptr;
@@ -120,7 +117,7 @@ class Monster_linkedList {
             cout << temp->a->getName() << " " << endl; //prints the name of the current Actor that temps points too
             temp = temp->next; // make temp get the next node
         } while (temp != head); //checks until we reach the end of the circ linked list
-        cout << endl;
+       cout << endl;
         }
     }
 };

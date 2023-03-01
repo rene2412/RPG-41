@@ -58,9 +58,11 @@ class Map {
 	static const char WALL     = '#';
 	static const char WATER    = '~';
 	static const char OPEN     = '.';
-	static const char TREASURE = '$';
+	static const char TREASURE = '?';
+	static const char Food     = 'F';
+	static const char Spa	   = 'S';
 	static const size_t SIZE = 100; //World is a 100x100 map
-	static const size_t DISPLAY = 30; //Show a 30x30 area at a time
+	static const size_t DISPLAY = 99; //Show a 30x30 area at a time
 	//Randomly generate map
 	void init_map() {
 		uniform_int_distribution<int> d100(1,100);
@@ -92,7 +94,7 @@ class Map {
 						if (map.at(i-1).at(j) == WATER or map.at(i+1).at(j) == WATER or map.at(i).at(j-1) == WATER or map.at(i).at(j+1) == WATER)
 							map.at(i).at(j) = WATER;
 					}*/
-					map.at(i).at(j) = OPEN;;
+					map.at(i).at(j) = OPEN;
 				}
 			}
 		}

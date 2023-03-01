@@ -1,3 +1,6 @@
-noob demon 20 33 20 20 10
-Arnold Terminator 100 37 40 32 10
-YO-MAMA Cow 100 42 100 100 1
+YO-MAMA Cow -50 999 100 100 1
+Arnold Terminator -41 37 40 32 10
+noob demon -33 33 20 20 10
+noob demon -24 33 20 20 10
+Arnold Terminator -50 37 40 32 10
+YO-MAMA Cow -41 999 100 100 1
