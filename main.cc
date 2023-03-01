@@ -133,7 +133,7 @@ int main() {
 	linkedList list;
 	Hero_linkedList list2;
 	Monster_linkedList list3;
-	vector<shared_ptr<Hero>> heroes; //Holds data for the heroes
+    vector<shared_ptr<Hero>> heroes; //Holds data for the heroes
 
 	vector<shared_ptr<Monster>> monsters; //Holds data for the monsters 
 	populate_Heroes(heroes,0); //test
@@ -207,21 +207,28 @@ int main() {
 			if (map.get_character(x,y) == 'M') {
 				turn_off_ncurses();	
 				begin_combat(list, list2, list3, all, heroes, monsters);
+				for (auto& monster : monsters) {
+                monster-> setHp(100);
+				}
+			    map.set_character(x, y, '.');	
 				turn_on_ncurses();
 			}
 			if (map.get_character(x,y) == '?') {
 				turn_off_ncurses();
 				interact(map,x,y,'?', heroes, monsters);
+				 map.set_character(x, y, '.');
 				turn_on_ncurses();
 			}
 			if (map.get_character(x,y) == 'F') {
 				turn_off_ncurses(); 
 				interact(map,x,y,'F', heroes, monsters);
+				 map.set_character(x, y, '.');
 				turn_on_ncurses();
 			}
 			if (map.get_character(x,y) == 'S') {
 				turn_off_ncurses();
 				interact(map,x,y,'S', heroes, monsters);
+				 map.set_character(x, y, '.');
 				turn_on_ncurses(); 
 			}
 			if (map.get_character(x,y) == '/' or map.get_character(x,y) == '-' or map.get_character(x,y) == '+' or map.get_character(x,y) == '|' or map.get_character(x,y) == '\\') {

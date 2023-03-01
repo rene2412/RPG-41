@@ -1,4 +1,4 @@
-Agent-K Blade-Runner 59 9999 60 1 1
-Agent-Z Blade-Runner 100 100 50 1 1
+Agent-K Blade-Runner -30 9999 60 1 1
+Agent-Z Blade-Runner 48 100 50 1 1
 Agent-K Blade-Runner 200 9999 60 1 1
 Agent-Z Blade-Runner 100 100 50 1 1
